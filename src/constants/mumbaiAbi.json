@@ -1,0 +1,243 @@
+[
+  {
+    "inputs": [
+      {
+        "internalType": "address payable",
+        "name": "gatewayAddress",
+        "type": "address"
+      },
+      { "internalType": "uint64", "name": "_destGasLimit", "type": "uint64" },
+      { "internalType": "uint64", "name": "_ackGasLimit", "type": "uint64" }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
+    "inputs": [
+      { "internalType": "string", "name": "message", "type": "string" }
+    ],
+    "name": "CustomError",
+    "type": "error"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint64",
+        "name": "requestId",
+        "type": "uint64"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "ackMessage",
+        "type": "string"
+      }
+    ],
+    "name": "AckFromDestination",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint64",
+        "name": "eventIdentifier",
+        "type": "uint64"
+      },
+      {
+        "indexed": false,
+        "internalType": "bool",
+        "name": "isSuccess",
+        "type": "bool"
+      }
+    ],
+    "name": "ExecutionStatus",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint64",
+        "name": "requestId",
+        "type": "uint64"
+      }
+    ],
+    "name": "NewPing",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint64",
+        "name": "srcChainType",
+        "type": "uint64"
+      },
+      {
+        "indexed": true,
+        "internalType": "string",
+        "name": "srcChainId",
+        "type": "string"
+      },
+      {
+        "indexed": true,
+        "internalType": "uint64",
+        "name": "requestId",
+        "type": "uint64"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "message",
+        "type": "string"
+      }
+    ],
+    "name": "PingFromSource",
+    "type": "event"
+  },
+  {
+    "inputs": [{ "internalType": "uint64", "name": "", "type": "uint64" }],
+    "name": "ackFromDestination",
+    "outputs": [{ "internalType": "string", "name": "", "type": "string" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "ackGasLimit",
+    "outputs": [{ "internalType": "uint64", "name": "", "type": "uint64" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "", "type": "address" },
+      { "internalType": "uint256", "name": "", "type": "uint256" }
+    ],
+    "name": "contacts",
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "currentRequestId",
+    "outputs": [{ "internalType": "uint64", "name": "", "type": "uint64" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "destGasLimit",
+    "outputs": [{ "internalType": "uint64", "name": "", "type": "uint64" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "gatewayContract",
+    "outputs": [
+      { "internalType": "contract IGateway", "name": "", "type": "address" }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [{ "internalType": "address", "name": "u0", "type": "address" }],
+    "name": "getContacts",
+    "outputs": [
+      { "internalType": "address[]", "name": "", "type": "address[]" }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "u0", "type": "address" },
+      { "internalType": "address", "name": "u1", "type": "address" }
+    ],
+    "name": "getMessages",
+    "outputs": [{ "internalType": "string[]", "name": "", "type": "string[]" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint64", "name": "eventIdentifier", "type": "uint64" },
+      { "internalType": "bool[]", "name": "execFlags", "type": "bool[]" },
+      { "internalType": "bytes[]", "name": "execData", "type": "bytes[]" }
+    ],
+    "name": "handleCrossTalkAck",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes",
+        "name": "srcContractAddress",
+        "type": "bytes"
+      },
+      { "internalType": "bytes", "name": "payload", "type": "bytes" },
+      { "internalType": "string", "name": "srcChainId", "type": "string" },
+      { "internalType": "uint64", "name": "srcChainType", "type": "uint64" }
+    ],
+    "name": "handleRequestFromSource",
+    "outputs": [{ "internalType": "bytes", "name": "", "type": "bytes" }],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "", "type": "address" },
+      { "internalType": "address", "name": "", "type": "address" },
+      { "internalType": "uint256", "name": "", "type": "uint256" }
+    ],
+    "name": "map",
+    "outputs": [{ "internalType": "string", "name": "", "type": "string" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "string", "name": "chainId", "type": "string" },
+      {
+        "internalType": "address",
+        "name": "destinationContractAddress",
+        "type": "address"
+      },
+      { "internalType": "address", "name": "user0", "type": "address" },
+      { "internalType": "address", "name": "user1", "type": "address" },
+      { "internalType": "string", "name": "message", "type": "string" }
+    ],
+    "name": "pingDestination",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint64", "name": "", "type": "uint64" },
+      { "internalType": "string", "name": "", "type": "string" },
+      { "internalType": "uint64", "name": "", "type": "uint64" }
+    ],
+    "name": "pingFromSource",
+    "outputs": [{ "internalType": "string", "name": "", "type": "string" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [{ "internalType": "address", "name": "a", "type": "address" }],
+    "name": "toBytes",
+    "outputs": [{ "internalType": "bytes", "name": "b", "type": "bytes" }],
+    "stateMutability": "pure",
+    "type": "function"
+  }
+]
