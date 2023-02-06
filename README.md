@@ -101,6 +101,9 @@ const { runContractFunction } = useWeb3Contract();
 
 To ensure that the user has a Web3 enabled wallet connected, you can check the isWeb3Enabled value returned by the useMoralis hook. If it is false, you can prompt the user to connect their wallet by rendering a button that calls the enableWeb3 function.
 
+![Authentication](https://firebasestorage.googleapis.com/v0/b/cross-chat-47b25.appspot.com/o/Authentication.png?alt=media&token=8cbcf306-f736-46e4-a3ac-96ddbb74274a)
+
+
 ```sh
 if (!isWeb3Enabled) {
   return (
@@ -122,6 +125,8 @@ Once the user has connected their wallet, the isWeb3Enabled value will change to
 ### `handleCreate`
 
 In order to create a channel between two wallets , a NULL message must be sent from one wallet to the other. This can be achieved by calling pingDestination function of the Cross-Talk Library using the runContractFunction function provided by the useWeb3Contract hook.
+
+![handleCreate](https://firebasestorage.googleapis.com/v0/b/cross-chat-47b25.appspot.com/o/createHandle.png?alt=media&token=489d3998-23c1-4d47-b315-87c8365166e9)
 
 The following code shows an example of how to use the runContractFunction function to create a channel between two wallets.
 
@@ -159,6 +164,8 @@ Once the runContractFunction function is called, a channel will be created betwe
 
 To send a message through a previously created channel between two wallets, the addMessage function can be used. The function is similar to the handleCreate function that was used to create the channel, but with a text message passed to the pingDestination function instead of a NULL message.
 
+![addMessage](https://firebasestorage.googleapis.com/v0/b/cross-chat-47b25.appspot.com/o/addMessage.png?alt=media&token=2a4f3eab-63b3-4276-81e9-e8876d3fcb8c)
+
 ```sh
 const addMessage = async () => {
   const options = {
@@ -190,6 +197,9 @@ Once the runContractFunction function is called, the text message will be sent t
 ### `getContacts`
 
 The getContacts function is used to retrieve the contacts with whom a channel has been created. It calls the getContacts function defined in the deployed smart contract.The getContacts takes in just one parameter ,u0 which is the sender's wallet address.
+
+![getContacts](https://firebasestorage.googleapis.com/v0/b/cross-chat-47b25.appspot.com/o/getContacts1.png?alt=media&token=938a73e0-acd9-4d8b-8a37-1175559f9a6b)
+
 ```sh
   const getContact = async () => {
     const options3 = {
@@ -206,6 +216,9 @@ The getContacts function is used to retrieve the contacts with whom a channel ha
 ### `getMessage`
 
 The getMessages function retrieves the messages sent through a channel between two wallets. It calls the getMessages function defined in the deployed smart contract [which will be further discussed later in the readme]. It just takes in two parameter , u0 and u1 which are the wallet addresses of sender and receiver respectively.
+
+![getMessage](https://firebasestorage.googleapis.com/v0/b/cross-chat-47b25.appspot.com/o/getMessage.png?alt=media&token=2bb1aa6f-07f1-4cd5-9c03-aae57cd18d0e)
+
 ```sh
 const getMessages = async () => {
     const options3 = {
