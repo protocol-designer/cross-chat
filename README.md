@@ -8,7 +8,7 @@ This project is built with [Router CrossTalk](https://dev.routerprotocol.com/cro
 
 Router Protocol is a solution introduced to address the issues hindering the usability of cross-chain liquidity migration in the DeFi ecosystem. It acts as a bridge connecting various layer 1 and layer 2 blockchains, allowing for the flow of contract-level data across them. The Router Protocol can either transfer tokens between chains or initiate operations on one chain and execute them on another.
 
-Please check the [official documentation of Router Protocol](https://www.routerprotocol.com/) 
+Please check the [official documentation of Router Protocol](https://dev.routerprotocol.com/) 
 
 ![cross-chat](https://firebasestorage.googleapis.com/v0/b/cross-chat-47b25.appspot.com/o/image.gif?alt=media&token=51706ade-52ea-4a41-9a73-c5885a039c91)
 
