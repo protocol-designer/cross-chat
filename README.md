@@ -1,70 +1,225 @@
-# Getting Started with Create React App
+# `Cross-Chat`
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+> Fully ready ReactJS Dapp for Cross-Chain Messaging using Router Cross-Talk
 
-## Available Scripts
+🚀DEMO: https://cross-chat-47b25.web.app/
 
-In the project directory, you can run:
+This project is built with [Router CrossTalk](https://dev.routerprotocol.com/crosstalk-library/overview/introduction)
 
-### `yarn start`
+Router Protocol is a solution introduced to address the issues hindering the usability of cross-chain liquidity migration in the DeFi ecosystem. It acts as a bridge connecting various layer 1 and layer 2 blockchains, allowing for the flow of contract-level data across them. The Router Protocol can either transfer tokens between chains or initiate operations on one chain and execute them on another.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Please check the [official documentation of Router Protocol](https://www.routerprotocol.com/) 
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+![cross-chat](https://firebasestorage.googleapis.com/v0/b/cross-chat-47b25.appspot.com/o/image.gif?alt=media&token=51706ade-52ea-4a41-9a73-c5885a039c91)
 
-### `yarn test`
+# ⭐️ `Star us`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+If this repository helps you build cross-chain dapps faster and easier - please star this project, every star makes us very happy!
 
-### `yarn build`
+# 🤝 `Need help?`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+If you need help or have other some questions - don't hesitate to write in our discord channel and we will check asap. [Discord link](https://discord.gg/xvx2pFu9). The best thing about this is the super active community ready to help at any time! We help each other.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+# 🚀 `Quick Start`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+📄 Clone or fork `cross-chat`:
 
-### `yarn eject`
+```sh
+git clone https://github.com/protocol-designer/cross-chat.git
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+💿 Install all dependencies:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```sh
+cd cross-chat-main
+npm install
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+🚴‍♂️ Run your App:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```sh
+npm start
+```
+# 🧭 `Table of contents`
+- [🚀 Quick Start](#-quick-start)
+- [🧭 Table of contents](#-table-of-contents)
+- [🏗 Frontend](#React JS, Moralis)
+  - [`Provider`](#Provider)
+  - [`Basic imports & setup`](#Basic-imports-&-setup)
+  - [`Authentication`](#Authentication)
+  - [`handleCreate`](#handleCreate)
+  - [`addMessage`](#addMessage)
+  - [`getContacts`](#getContacts)
+  - [`getMessage`](#getMessage)
+- [🏗 Backend](#Solidity, Router Cross-Talk Library)
+  -
+# 🏗 Frontend
 
-## Learn More
+### `Provider`
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+This project uses the Moralis library for interacting with the Ethereum blockchain. Moralis is a provider for the Web3.js library, which allows for communication with Ethereum nodes.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+In the Index.js file, the React app has been wrapped with the MoralisProvider component provided by the Moralis library. This sets up the Moralis instance and makes it available to the rest of the app through the React context API.
 
-### Code Splitting
+For more information on Moralis, visit their official website at https://moralis.io/.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+As an alternative, one could use the Ether.js or Web3.js libraries for similar functionality. The choice of Moralis in this project was made due to its ease of use and comprehensive documentation.
 
-### Analyzing the Bundle Size
+```sh
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(
+  <MoralisProvider 
+  >
+    <App />
+  </MoralisProvider>
+);
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### `Basic imports & setup`
 
-### Making a Progressive Web App
+In order to interact with the blockchain using Moralis, you need to import the useMoralis and useWeb3Contract hooks from the react-moralis library
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+```sh
+import { useMoralis, useWeb3Contract } from 'react-moralis';
+```
+Next, you can use the useMoralis hook to get information about the the user's account and chain ID.
 
-### Advanced Configuration
+```sh
+const {
+  isWeb3Enabled,
+  enableWeb3,
+  account,
+  chainId: chainIdHex,
+} = useMoralis();
+```
+The useWeb3Contract hook is used to run functions on smart contracts deployed on the blockchain.
+```sh
+const { runContractFunction } = useWeb3Contract();
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### `Authentication`
 
-### Deployment
+To ensure that the user has a Web3 enabled wallet connected, you can check the isWeb3Enabled value returned by the useMoralis hook. If it is false, you can prompt the user to connect their wallet by rendering a button that calls the enableWeb3 function.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+```sh
+if (!isWeb3Enabled) {
+  return (
+    <div>
+      <h2>CrossChat</h2>
+      <button
+        onClick={async () => await enableWeb3()}
+      >
+        Connect Wallet
+      </button>
+    </div>
+  );
+}
+```
+When the user clicks the "Connect Wallet" button, the enableWeb3 function will be called, which will prompt the user to connect their Web3 enabled wallet (e.g. MetaMask).
 
-### `yarn build` fails to minify
+Once the user has connected their wallet, the isWeb3Enabled value will change to true, allowing you to proceed with interacting with the Ethereum blockchain through Moralis.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### `handleCreate`
+
+In order to create a channel between two wallets , a NULL message must be sent from one wallet to the other. This can be achieved by calling pingDestination function of the Cross-Talk Library using the runContractFunction function provided by the useWeb3Contract hook.
+
+The following code shows an example of how to use the runContractFunction function to create a channel between two wallets.
+
+```sh
+const handleCreate = async () => {
+  const options = {
+    abi: abi,
+    contractAddress: contractAddress,
+    functionName: "pingDestination",
+    params: {
+      chainId: "80001",
+      destinationContractAddress: destContractAdd,
+      user0: account,
+      user1: channelReceiptAddress,
+      message: "#NULL#",
+    },
+  };
+
+  const result = await runContractFunction({ params: options });
+  console.log(result, account);
+};
+```
+The abi variable should contain the ABI (Application Binary Interface) of the source contract that is deployed on the Ethereum blockchain. The contractAddress variable should contain the address of the deployed source contract.
+
+The pingDestination function is called with the following parameters:
+
+chainId: The ID of the destination chain.
+destinationContractAddress: The address of the destination contract.
+user0: The address of the sender's wallet.
+user1: The address of the receiver's wallet.
+message: A NULL message to create the channel.
+Once the runContractFunction function is called, a channel will be created between the two wallets.
+
+### `addMessage`
+
+To send a message through a previously created channel between two wallets, the addMessage function can be used. The function is similar to the handleCreate function that was used to create the channel, but with a text message passed to the pingDestination function instead of a NULL message.
+
+```sh
+const addMessage = async () => {
+  const options = {
+    abi: abi,
+    contractAddress: contractAddress,
+    functionName: "pingDestination",
+    params: {
+      chainId: "80001",
+      destinationContractAddress: destContractAdd,
+      user0: account,
+      user1: receiptAddress,
+      message: msg,
+    },
+  };
+  const result = await runContractFunction({ params: options });
+  console.log(result, account);
+};
+```
+The abi and contractAddress variables are the same as in the handleCreate function, and they should contain the ABI and address of the source contract deployed.
+The pingDestination function is called with the following parameters:
+
+chainId: The ID of the destination chain.
+destinationContractAddress: The address of the destination contract.
+user0: The address of the sender's wallet.
+user1: The address of the receiver's wallet.
+message: The text message to be sent through the channel.
+Once the runContractFunction function is called, the text message will be sent through the channel between the two wallets.
+
+### `getContacts`
+
+The getContacts function is used to retrieve the contacts with whom a channel has been created. It calls the getContacts function defined in the deployed smart contract.The getContacts takes in just one parameter ,u0 which is the sender's wallet address.
+```sh
+  const getContact = async () => {
+    const options3 = {
+      abi: abi,
+      contractAddress: destContractAdd,
+      functionName: "getContacts",
+      params: { u0: account },
+    };
+    let something = await runContractFunction({ params: options3 });
+    
+  }; 
+```
+
+### `getMessage`
+
+The getMessages function retrieves the messages sent through a channel between two wallets. It calls the getMessages function defined in the deployed smart contract [which will be further discussed later in the readme]. It just takes in two parameter , u0 and u1 which are the wallet addresses of sender and receiver respectively.
+```sh
+const getMessages = async () => {
+    const options3 = {
+      chainId: chainId,
+      abi: abi,
+      contractAddress: destContractAdd,
+      functionName: "getMessages",
+      params: { u0: account, u1: receiptAddress },
+    };
+    let something = await runContractFunction({ params: options3 });
+    console.log(something);
+    setMessage(something);
+  };
+  ```
+
+
+
