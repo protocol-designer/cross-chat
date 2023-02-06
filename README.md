@@ -217,7 +217,7 @@ The getContacts function is used to retrieve the contacts with whom a channel ha
 
 The getMessages function retrieves the messages sent through a channel between two wallets. It calls the getMessages function defined in the deployed smart contract [which will be further discussed later in the readme]. It just takes in two parameter , u0 and u1 which are the wallet addresses of sender and receiver respectively.
 
-![getMessage](https://firebasestorage.googleapis.com/v0/b/cross-chat-47b25.appspot.com/o/getMessage.png?alt=media&token=2bb1aa6f-07f1-4cd5-9c03-aae57cd18d0e)
+![getMessage](https://firebasestorage.googleapis.com/v0/b/cross-chat-47b25.appspot.com/o/getMessage.png?alt=media&token=bcbac1fb-0dff-44dd-9605-6c0feeab0c76)
 
 ```sh
 const getMessages = async () => {
