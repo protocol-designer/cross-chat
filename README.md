@@ -452,7 +452,7 @@ The function returns the contacts stored in the contacts mapping for the given w
  
  ### `Deployments`
  
-To implement cross-chain communication, we need to deploy the same contract on all chains that we want to have communication with. The first step is to open Remix.Ethereum and compile the code. After that, we need to deploy the contract on the desired chains and pass in the Gateway address, destination gas limit, and source gas limit as parameters. The Gateway address can be found on the Router Protocol's Supported Chains documentation page at https://devnet-docs.routerprotocol.com/networks/supported-chains.
+To implement cross-chain communication, we need to deploy the same contract on all chains that we want to have communication with. The first step is to open https://remix.ethereum.org/ and compile the code. After that, we need to deploy the contract on the desired chains and pass in the Gateway address, destination gas limit, and source gas limit as parameters. The Gateway address can be found on the Router Protocol's Supported Chains documentation page at https://devnet-docs.routerprotocol.com/networks/supported-chains.
 
 To determine the gas limits, we can use a gas estimator. One option is to use the hardhat-gas-reporter plugin. Alternatively, we can view recent transactions on the desired chain through its explorer to determine the gas limit.
 
