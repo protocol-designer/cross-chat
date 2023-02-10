@@ -61,7 +61,7 @@ npm start
   
 # 🏗 Frontend
 
-### `Provider`
+## `Provider`
 
 This project uses the Moralis library for interacting with the Ethereum blockchain. Moralis is a provider for the Web3.js library, which allows for communication with Ethereum nodes.
 
