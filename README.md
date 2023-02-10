@@ -81,7 +81,7 @@ root.render(
 );
 ```
 
-### `Basic imports & setup`
+# `Basic imports & setup`
 
 In order to interact with the blockchain using Moralis, you need to import the useMoralis and useWeb3Contract hooks from the react-moralis library
 
@@ -103,7 +103,7 @@ The useWeb3Contract hook is used to run functions on smart contracts deployed on
 const { runContractFunction } = useWeb3Contract();
 ```
 
-### `Authentication`
+# `Authentication`
 
 To ensure that the user has a Web3 enabled wallet connected, you can check the isWeb3Enabled value returned by the useMoralis hook. If it is false, you can prompt the user to connect their wallet by rendering a button that calls the enableWeb3 function.
 
@@ -128,7 +128,7 @@ When the user clicks the "Connect Wallet" button, the enableWeb3 function will b
 
 Once the user has connected their wallet, the isWeb3Enabled value will change to true, allowing you to proceed with interacting with the Ethereum blockchain through Moralis.
 
-### `handleCreate`
+# `handleCreate`
 
 In order to create a channel between two wallets , a NULL message must be sent from one wallet to the other. This can be achieved by calling pingDestination function of the Cross-Talk Library using the runContractFunction function provided by the useWeb3Contract hook.
 
@@ -166,7 +166,7 @@ user1: The address of the receiver's wallet.
 message: A NULL message to create the channel.
 Once the runContractFunction function is called, a channel will be created between the two wallets.
 
-### `addMessage`
+# `addMessage`
 
 To send a message through a previously created channel between two wallets, the addMessage function can be used. The function is similar to the handleCreate function that was used to create the channel, but with a text message passed to the pingDestination function instead of a NULL message.
 
@@ -200,7 +200,7 @@ user1: The address of the receiver's wallet.
 message: The text message to be sent through the channel.
 Once the runContractFunction function is called, the text message will be sent through the channel between the two wallets.
 
-### `getContacts`
+# `getContacts`
 
 The getContacts function is used to retrieve the contacts with whom a channel has been created. It calls the getContacts function defined in the deployed smart contract.The getContacts takes in just one parameter ,u0 which is the sender's wallet address.
 
@@ -219,7 +219,7 @@ The getContacts function is used to retrieve the contacts with whom a channel ha
   }; 
 ```
 
-### `getMessage`
+# `getMessage`
 
 The getMessages function retrieves the messages sent through a channel between two wallets. It calls the getMessages function defined in the deployed smart contract [which will be further discussed later in the readme]. It just takes in two parameter , u0 and u1 which are the wallet addresses of sender and receiver respectively.
 
@@ -242,7 +242,7 @@ const getMessages = async () => {
   
 # 🏗 Backend
   
-### `Initiating the Contract`
+# `Initiating the Contract`
 
 For initiating the smart contract named "CrossChat", the contract imports three external contracts to be used in the implementation of the "Initiating the Contract" contract.
 
@@ -259,7 +259,7 @@ import "evm-gateway-contract/contracts/IGateway.sol";
 import "evm-gateway-contract/contracts/ICrossTalkApplication.sol";
 import "evm-gateway-contract/contracts/Utils.sol";
 ```
-### `Initiating the Contract`
+# `Initiating the Contract`
 
 Creating State Variables and the Constructor
 In this section of the smart contract code, state variables and events are defined for the contract in the Solidity programming language. The code defines the following:
@@ -304,7 +304,7 @@ constructor(
 }
 ```
 
-### `Creating a channel/ Sending a message to an address on destination chain`
+# `Creating a channel/ Sending a message to an address on destination chain`
 
 pingDestination Function:-
 The pingDestination function is used to create a channel and send a message to a specified address on a destination chain. It is a public function that is payable.
@@ -373,7 +373,7 @@ _pingDestination function calls the requestToDest function on the Router's Gatew
         );
     }
 ```
-### `Handling a crosschain request`
+# `Handling a crosschain request`
 
 To handle cross-chain requests on the destination chain we make use of handleRequestFromSource function. This function is automatically called when the destination chain receives the requests, and the user does not need to manually call it. The core logic of the dapp is written in this function to store the message and contacts in two mappings, map and contacts, respectively.
 
@@ -450,13 +450,13 @@ The function returns the contacts stored in the contacts mapping for the given w
     }
  ```
  
- ### `Deployments`
+ # `Deployments`
  
 To implement cross-chain communication, we need to deploy the same contract on all chains that we want to have communication with. The first step is to open https://remix.ethereum.org/ and compile the code. After that, we need to deploy the contract on the desired chains and pass in the Gateway address, destination gas limit, and source gas limit as parameters. The Gateway address can be found on the Router Protocol's Supported Chains documentation page at https://devnet-docs.routerprotocol.com/networks/supported-chains.
 
 To determine the gas limits, we can use a gas estimator. One option is to use the hardhat-gas-reporter plugin. Alternatively, we can view recent transactions on the desired chain through its explorer to determine the gas limit.
 
-### `Back to Frontend`
+# `Back to Frontend`
 
 To allow for cross-chain communication, the contract must be deployed on multiple chains. After deployment, copy the ABI of the contract, the addresses of the deployed contracts, and the chain IDs. Pass this information to the runContractFunction function as follows:
 
