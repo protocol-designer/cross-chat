@@ -244,10 +244,8 @@ const getMessages = async () => {
   
 # `Initiating the Contract`
 
-For initiating the smart contract named "CrossChat", the contract imports three external contracts to be used in the implementation of the "Initiating the Contract" contract.
-
-The "ICrossTalkApplication.sol" and "Utils.sol" contracts are imported from the "evm-gateway-contract/contracts" folder.
-The "CrossTalkUtils.sol" contract is imported from the "@routerprotocol/crosstalk-utils/contracts" folder.
+For initiating the smart contract named "CrossChat", the contract imports three external contracts
+The "ICrossTalkApplication.sol", "Utils.sol" and "IGateway.sol" contracts are imported from the "evm-gateway-contract/contracts" 
 The "CrossChat" contract implements the "ICrossTalkApplication" contract by inheriting from it. This means that the "CrossChat" contract must have all the functions and variables defined in the "ICrossTalkApplication" contract.
 By importing and implementing these contracts, the "CrossChat" contract will have access to their functionality and will be compatible with other contracts that follow the same standards.
 
